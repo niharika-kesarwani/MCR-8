@@ -8,7 +8,7 @@ export const Home = () => {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex flex-col justify-between md:flex-row">
+      <div className="flex flex-col justify-between gap-5 md:flex-row">
         <div className="text-3xl font-bold">Meetup Events</div>
         <select
           className="p-2"
