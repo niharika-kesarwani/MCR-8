@@ -3,12 +3,16 @@ import { useMeetup } from "../main";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import CurrencyRupeeOutlinedIcon from "@mui/icons-material/CurrencyRupeeOutlined";
+import { meetupConstants } from "../constants/meetup-constants";
+import { useEffect } from "react";
 
 export const MeetupDetail = () => {
   const { meetupId } = useParams();
   const {
     meetup: { allMeetups },
+    setMeetup,
   } = useMeetup();
+  const { SET_SHOW_RSVP_MODAL, SET_SELECTED_MEETUP } = meetupConstants;
 
   const selectedMeetup = allMeetups?.find(({ id }) => id === meetupId);
 
@@ -28,7 +32,12 @@ export const MeetupDetail = () => {
     speakers,
     price,
     additionalInformation,
+    isRSVP,
   } = selectedMeetup;
+
+  useEffect(() => {
+    setMeetup({ type: SET_SELECTED_MEETUP, payload: selectedMeetup });
+  }, []);
 
   return (
     <div className="flex flex-col gap-10 md:flex-row">
@@ -111,9 +120,16 @@ export const MeetupDetail = () => {
             );
           })}
         </div>
-        <button className="w-min self-center rounded-lg bg-red-400 px-8 py-2 font-bold text-white">
-          RSVP
-        </button>
+        {new Date(eventStartTime) > new Date() && (
+          <button
+            className="w-min self-center rounded-lg bg-red-400 px-8 py-2 font-bold text-white"
+            onClick={() =>
+              setMeetup({ type: SET_SHOW_RSVP_MODAL, payload: true })
+            }
+          >
+            {isRSVP ? "Already RSVPed" : "RSVP"}
+          </button>
+        )}
       </div>
     </div>
   );
