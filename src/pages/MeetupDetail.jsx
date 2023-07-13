@@ -122,9 +122,9 @@ export const MeetupDetail = () => {
         </div>
         {new Date(eventStartTime) > new Date() && (
           <button
-            className="w-min self-center rounded-lg bg-red-400 px-8 py-2 font-bold text-white"
+            className="self-center rounded-lg bg-red-400 px-8 py-2 font-bold text-white"
             onClick={() =>
-              setMeetup({ type: SET_SHOW_RSVP_MODAL, payload: true })
+              !isRSVP && setMeetup({ type: SET_SHOW_RSVP_MODAL, payload: true })
             }
           >
             {isRSVP ? "Already RSVPed" : "RSVP"}
