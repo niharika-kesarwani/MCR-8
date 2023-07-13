@@ -21,9 +21,10 @@ export const Header = () => {
           type="text"
           className="h-8 rounded-lg border p-5"
           placeholder="Search by title or tags..."
-          onChange={(e) =>
-            setMeetup({ type: SET_TEXT_FILTER, payload: e.target.value })
-          }
+          onChange={(e) => {
+            setMeetup({ type: SET_TEXT_FILTER, payload: e.target.value });
+            navigate("/");
+          }}
         />
       </div>
     </div>
