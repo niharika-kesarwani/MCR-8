@@ -1,5 +1,9 @@
 /* eslint-disable react/prop-types */
+import { useNavigate } from "react-router-dom";
+
 export const MeetupCard = ({ meetup }) => {
+  const navigate = useNavigate();
+
   const {
     id,
     title,
@@ -17,7 +21,10 @@ export const MeetupCard = ({ meetup }) => {
     additionalInformation,
   } = meetup;
   return (
-    <div className="flex h-60 w-60 flex-col gap-2">
+    <div
+      className="flex h-60 w-60 flex-col gap-2 hover:cursor-pointer"
+      onClick={() => navigate(`/meetup/${id}`)}
+    >
       <div className="relative h-[60%] object-contain">
         <img src={eventThumbnail} className="h-full rounded-lg" />
         <div className="absolute left-2 top-2 rounded-lg bg-slate-100 px-2 py-1">
