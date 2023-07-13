@@ -5,7 +5,7 @@ import { Home } from "./pages/Home";
 
 function App() {
   return (
-    <div className="bg-slate-200 p-5">
+    <div className="min-h-screen bg-slate-200 p-5">
       <Header />
       <hr className="my-8 h-px border-0 bg-gray-200 dark:bg-gray-500" />
       <Routes>
