@@ -9,11 +9,23 @@ export const MeetupContext = createContext();
 export const MeetupProvider = ({ children }) => {
   const [meetup, setMeetup] = useReducer(meetupReducer, initialMeetup);
 
-  const { allMeetups, eventTypeFilter } = meetup;
+  const { allMeetups, textFilter, eventTypeFilter } = meetup;
+
+  const searchFilteredMeetups =
+    textFilter === ""
+      ? allMeetups
+      : allMeetups?.filter(
+          ({ title, eventTags }) =>
+            title.toLowerCase().includes(textFilter.toLowerCase()) ||
+            eventTags.some((tag) =>
+              tag.toLowerCase().includes(textFilter.toLowerCase)
+            )
+        );
+
   const displayMeetups =
     eventTypeFilter === "both"
-      ? allMeetups
-      : allMeetups?.filter(({ eventType }) =>
+      ? searchFilteredMeetups
+      : searchFilteredMeetups?.filter(({ eventType }) =>
           eventTypeFilter === "online"
             ? eventType === "Online"
             : eventType === "Offline"
